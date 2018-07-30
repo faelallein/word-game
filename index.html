@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+    #dvmsg{
+      font-size: 20px;
+      font-style:oblique;
+    }
+    .letra{
+        width: 30px;
+        font-size: 25px;
+        text-transform: uppercase;
+        text-align: center;
+        margin: 5px;
+        display:none;
+
+    }
+    .letraJ{
+        width: 30px;
+        font-size: 25px;
+        text-transform: uppercase;
+        text-align: center;
+        margin: 5px;
+    }
+    .dvdisplay{
+        display: block;
+    }
+    #dvpalavra{
+      left:140px;
+      position:relative;
+    }
+    #dvforca{
+      width: 260px;
+      height: 400px;
+      position: relative;
+      left: 150px;
+      border: 1px solid rgba(0,0,0,0.3)
+      background: #f6c7b9;
+    }
+    #controlesJogador{
+      width: 260px;
+      left:140px;
+      position:relative;
+      display: none;
+    }
+    .btingame{
+      width :auto;
+      color: #fff;
+      background-color: #050;
+      border-color: #080;
+      border-radius: .25rem;
+      cursor: pointer;
+    }
+    .btingame:hover{
+      background-color: #090;
+    }
+    .btchoice{
+      width: 120px;
+      height: 40px;
+      left: 155px;
+      position: relative;
+      color: #fff;
+      background-color: #005;
+      border-color: #008;
+      border-radius: .25rem;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .btchoice:hover{
+      background-color: #009;
+    }
+    </style>
+    <script>
+        var img;
+        var forca;
+
+        function carregarImg(){
+          img = new Image();
+          img.src = "img/into.gif";
+          forca = document.getElementById('dvforca');
+          forca.style.backgroundImage="url('"+img.src+"')";
+        }
+
+        var biblioteca=["aguia"   ,"burro"   ,"camelo"  ,"dromedalio" ,"elefante" ,"vaca"       ,"boi"      ,"macaco"     ,"sapo"       ,"cachorro"  ,
+                        "brasil"  ,"japão"   , "mexico" ,"holanda"    ,"africa"   , "portugal"  ,"croacia"  ,"argentina"  ,"india"      ,"australia" ,
+                        "maça"    ,"banana"  ,"pera"    ,"uva"        ,"mamao"    ,"ameixa"     , "limao"   ,"cereja"     ,"cereja"     ,"abacaixi"  ,
+                        "carro"   ,"aviao"   ,"onibus"  ,"van"        ,"moto"     ,"trem"       ,"barco"    ,"caminhao"   ,"submarino"  ,"foguete"   ];
+
+
+        var qtd = biblioteca.length-1;
+        var pos = Math.round(Math.random()*qtd);
+        var palavra = biblioteca[pos];
+        var cxLetras = [];
+        var acertos;
+        var errosMax = 5;
+        var erros = 0;
+        var acertou = false;
+        var jogando = false;
+        var jog;
+        var tam;
+        var escolha = 2;
+
+        function defineLetras(t){
+          var obj;
+          for (var i = 0; i < 20; i++) {
+            obj=document.getElementById("letra"+i).value="";
+            obj=document.getElementById("letra"+i).style.display="none"
+          }
+          for (var i = 0; i < t ; i++) {
+            obj=document.getElementById("letra"+i).style.display="inline-block"
+          }
+        }
+
+        function jogar(){
+          jog=document.getElementById('letraJ');
+          jog.focus();
+          if(jog.value=="" && jogando){
+              alert("Digite uma palavra");
+          }else{
+            if(jogando){
+              var obj;
+              var letratmp
+              var letra
+              var pesq
+              letra=jog.value;
+              jog.value=""
+              pesq=palavra.match(letra)
+              acertou=false;
+              while(pesq!=null){
+                letratmp=palavra.search(letra);
+                obj=document.getElementById('letra'+letratmp).value=letra;
+                palavra=palavra.replace(letra,0);
+                acertos++;
+                pesq=palavra.match(letra);
+                acertou=true}
+              }
+              if (!acertou){
+                  document.getElementById('dvletrasdigitadas').innerHTML+=letra.toUpperCase();
+                  erros++
+                  if(erros<=7){
+                        img.src = "img/corpo"+erros+".gif";
+                        forca.style.backgroundImage = "url('"+img.src+"')";
+                  }else{
+                    img.src = "img/fim.gif";
+                    forca.style.backgroundImage = "url('"+img.src+"')";
+                    setTimeout(function(){
+                      img.src = "img/gameover.gif";
+                      forca.style.backgroundImage = "url('"+img.src+"')";
+                      document.getElementById('dvmsg').innerHTML="PERDEU!"
+                      jogando=false;
+                    },2500);
+                  }
+              }
+              if (acertos==tam){
+                img.src = "img/win.gif";
+                forca.style.backgroundImage = "url('"+img.src+"')";
+                document.getElementById("dvmsg").innerHTML="GANHOU!"
+                jogando=false;
+              }
+            }
+          }
+
+
+        function inicia(){
+          img.src = "img/corpo.gif";
+          forca.style.backgroundImage="url('"+img.src+"')";
+          jogando= true;
+          jog=document.getElementById("letraJ");
+          jog.value="";
+          jog.focus();
+          acertos=0;
+          erros=0
+          acertou=false;
+          document.getElementById("dvmsg").innerHTML="";
+          if (escolha==1){
+            pos=Math.round(Math.random()*qtd);
+            palavra=biblioteca[pos];
+          }else if (escolha==2) {
+            palavra = prompt("Desafiante entre com a palavra com até 20 caracteres:")
+          }
+          tam=palavra.length;
+          defineLetras(tam);
+          }
+
+        function vsCOM(){
+          document.getElementById('btchoice1').innerHTML = 'Nova Palavra';
+          document.getElementById('btchoice2').style.display = 'none';
+          document.getElementById('controlesJogador').style.display = 'inline-block';
+          document.getElementById('dvletrasdigitadas').innerHTML="Letras Digitadas: ";
+          escolha = 1;
+          inicia()
+        }
+
+        function vsPLAYER(){
+          document.getElementById('btchoice2').innerHTML = 'Novo Desafio';
+          document.getElementById('btchoice1').style.display = 'none';
+          document.getElementById('controlesJogador').style.display = 'inline-block';
+          document.getElementById('dvletrasdigitadas').innerHTML="Letras Digitadas: " ;
+          escolha = 2;
+          inicia()
+        }
+
+        function dica(){
+          if(pos<10){
+            alert("ANIMAIS");
+          }else if(pos>=10 && pos<20){
+            alert("PAISES");
+          }else if(pos>=20 && pos<30){
+            alert("FRUTAS");
+          }else if(pos>=30 && pos<40){
+            alert("VEICULOS");
+          }
+        }
+
+        window.addEventListener('load', carregarImg);
+    </script>
+  </head>
+  <body>
+      <div>
+      <div id="mdjogo" class="dvdisplay">
+          <button id="btchoice1" class="btchoice" onclick="vsCOM()"> vs COM </button>
+          <button id="btchoice2" class="btchoice" onclick="vsPLAYER()"> vs PLAYER</button>
+      </div><br>
+      <div id="dvpalavra" class="dvdisplay">
+        <input type"text" id="letra0" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra1" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra2" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra3" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra4" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra5" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra6" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra7" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra8" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra9" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra10" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra11" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra12" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra13" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra14" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra15" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra16" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra17" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra18" class="letra" maxlength="1" disabled>
+        <input type"text" id="letra19" class="letra" maxlength="1" disabled>
+      </div><br>
+      <div id="dvjogador" class="dvdisplay">
+        <div id="controlesJogador">
+          <div id="dvmsg"></div><br>
+          <input type="text" id="letraJ" class="letraJ" maxlength="1">
+          <button class="btingame" onclick="jogar()"> Jogar</button>
+          <button class="btingame" onclick="dica()"> Dica </button><br>
+          <div id="dvletrasdigitadas" >Letras Digitadas: </div><br>
+        </div>
+      </div><br>
+      <div id="dvforca">
+      </div>
+    </div><br>
+    <div>Para resetar o game aperte o F5.</div>
+
+  </body>
+</html>
