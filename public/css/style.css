@@ -1,0 +1,67 @@
+#dvmsg{
+     font-size: 20px;
+     font-style:oblique;
+}
+.letra{
+     width: 30px;
+     font-size: 25px;
+     text-transform: uppercase;
+     text-align: center;
+     margin: 5px;
+     display:none;
+
+}
+.letraJ{
+     width: 30px;
+     font-size: 25px;
+     text-transform: uppercase;
+     text-align: center;
+     margin: 5px;
+}
+.dvdisplay{
+     display: block;
+}
+#dvpalavra{
+     left:140px;
+     position:relative;
+}
+#dvforca{
+     width: 260px;
+     height: 400px;
+     position: relative;
+     left: 150px;
+     border: 1px solid rgba(0,0,0,0.3)
+     background: #f6c7b9;
+}
+#controlesJogador{
+     width: 260px;
+     left:140px;
+     position:relative;
+     display: none;
+}
+.btingame{
+     width :auto;
+     color: #fff;
+     background-color: #050;
+     border-color: #080;
+     border-radius: .25rem;
+     cursor: pointer;
+}
+.btingame:hover{
+     background-color: #090;
+}
+.btchoice{
+     width: 120px;
+     height: 40px;
+     left: 155px;
+     position: relative;
+     color: #fff;
+     background-color: #005;
+     border-color: #008;
+     border-radius: .25rem;
+     display: inline-block;
+     cursor: pointer;
+}
+.btchoice:hover{
+     background-color: #009;
+}

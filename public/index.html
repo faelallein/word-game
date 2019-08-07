@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+     <meta charset="utf-8">
+     <title>word-game</title>
+     <link rel="stylesheet" href="css/style.css">
+     </head>
+     <body>
+          <div>
+               <div id="mdjogo" class="dvdisplay">
+                    <button id="btchoice1" class="btchoice" onclick="vsCOM()"> vs COM </button>
+                    <button id="btchoice2" class="btchoice" onclick="vsPLAYER()"> vs PLAYER</button>
+               </div><br>
+               <div id="dvpalavra" class="dvdisplay">
+                    <input type"text" id="letra0" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra1" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra2" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra3" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra4" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra5" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra6" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra7" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra8" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra9" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra10" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra11" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra12" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra13" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra14" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra15" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra16" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra17" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra18" class="letra" maxlength="1" disabled>
+                    <input type"text" id="letra19" class="letra" maxlength="1" disabled>
+               </div><br>
+               <div id="dvjogador" class="dvdisplay">
+                    <div id="controlesJogador">
+                         <div id="dvmsg"></div><br>
+                         <input type="text" id="letraJ" class="letraJ" maxlength="1">
+                         <button class="btingame" onclick="jogar()"> Jogar</button>
+                         <button class="btingame" onclick="dica()"> Dica </button><br>
+                         <div id="dvletrasdigitadas" >Letras Digitadas: </div><br>
+                    </div>
+               </div><br>
+               <div id="dvforca">
+               </div>
+          </div><br>
+          <div>Para resetar o game aperte o F5.</div>
+          <script type="text/javascript" src="js/main.js">
+
+          </script>
+     </body>
+     </html>
